@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App3.MainPage">
 
-    <ListView x:Name="listViewVeiculos" ItemsSource="{Binding Veiculos}">
+    <ListView x:Name="listViewVeiculos" ItemsSource="{Binding Veiculos}" Margin="25" ItemTapped="listViewVeiculos_ItemTapped">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -11,7 +11,7 @@
                         <StackLayout Orientation="Horizontal" >
                             <Label Text="{Binding Nome}" FontSize="20" VerticalTextAlignment="Center"></Label>
                             <Label Text=" - " VerticalTextAlignment="Center"></Label>
-                            <Label Text="{Binding Preco}" FontAttributes="Bold" VerticalTextAlignment="Center"></Label>
+                            <Label Text="{Binding PrecoFormatado}" FontAttributes="Bold" VerticalTextAlignment="Center"></Label>
                         </StackLayout>
                     </ViewCell.View>
                 </ViewCell>

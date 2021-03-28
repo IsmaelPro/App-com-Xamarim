@@ -9,10 +9,17 @@ using Xamarin.Forms;
 namespace App3
 {
     public class Veiculo
+    {
+        public string Nome { get; set; }
+        public decimal Preco { get; set; }
+        public string PrecoFormatado
         {
-            public string Nome { get; set; }
-            public decimal Preco { get; set; }
+            get
+            {
+                return string.Format("R$ {0}", Preco);
+            }
         }
+    }
     public partial class MainPage : ContentPage
     {
         public List<Veiculo> Veiculos { get; set; }
@@ -28,6 +35,13 @@ namespace App3
 
             this.BindingContext = this;
 
+        }
+
+        private void listViewVeiculos_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var veiculo = (Veiculo)e.Item;
+
+            DisplayAlert("TestDrive", string.Format("Você tocou no veículo {0} que custa {1}", veiculo.Nome, veiculo.PrecoFormatado), "ok");
         }
     }
 }
