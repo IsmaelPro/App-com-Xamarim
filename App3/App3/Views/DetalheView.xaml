@@ -4,9 +4,10 @@
              x:Class="App3.Views.DetalheView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Maintext}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button x:Name="buttonProximo" Text="Próximo" Clicked="buttonProximo_Clicked" HorizontalOptions="CenterAndExpand" VerticalOptions="End"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

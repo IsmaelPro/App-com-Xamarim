@@ -10,20 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace App3.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DetalheView : ContentPage
+    public partial class AgendamentoView : ContentPage
     {
-        public Veiculo Veiculo { get; set; }
-        public DetalheView(Veiculo veiculo)
+        public AgendamentoView(Veiculo veiculo)
         {
             InitializeComponent();
             this.Title = veiculo.Nome;
-            this.Veiculo = veiculo;
         }
-
-        private void buttonProximo_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new AgendamentoView(this.Veiculo));
-        }
-
     }
 }
