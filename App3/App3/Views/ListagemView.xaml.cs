@@ -6,24 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace App3
+namespace App3.Views
 {
     public class Veiculo
     {
         public string Nome { get; set; }
         public decimal Preco { get; set; }
-        public string PrecoFormatado
-        {
-            get
-            {
-                return string.Format("R$ {0}", Preco);
-            }
-        }
+        public string PrecoFormatado => string.Format("R$ {0}", Preco);
+            
     }
-    public partial class MainPage : ContentPage
+    public partial class ListagemView : ContentPage
     {
         public List<Veiculo> Veiculos { get; set; }
-        public MainPage()
+        public ListagemView()
         {
             InitializeComponent();
             this.Veiculos = new List<Veiculo>
@@ -37,11 +32,14 @@ namespace App3
 
         }
 
+
+
         private void listViewVeiculos_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var veiculo = (Veiculo)e.Item;
 
-            DisplayAlert("TestDrive", string.Format("Você tocou no veículo {0} que custa {1}", veiculo.Nome, veiculo.PrecoFormatado), "ok");
+            Navigation.PushAsync(new DetalheView());
+
         }
     }
 }
