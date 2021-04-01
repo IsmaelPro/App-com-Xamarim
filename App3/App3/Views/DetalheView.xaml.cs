@@ -30,7 +30,7 @@ namespace App3.Views
             }
         }
 
-        public string ArCondicionado => string.Format("Freio ABS - R$ {0}", AR_CONDICIONADO);
+        public string ArCondicionado => string.Format("Ar Condicionado - R$ {0}", AR_CONDICIONADO);
         private bool TemAr;
 
         public bool TemArCondicionado
@@ -47,7 +47,7 @@ namespace App3.Views
             }
         }
 
-        public string MP3Player => string.Format("Freio ABS - R$ {0}", MP3_PLAYER);
+        public string MP3Player => string.Format("MP3 Player - R$ {0}", MP3_PLAYER);
         private bool Mp3;
 
         public bool TemMP3Player
