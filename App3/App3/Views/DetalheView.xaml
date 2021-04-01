@@ -1,13 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding Veiculo.Nome}"
              x:Class="App3.Views.DetalheView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Maintext}"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-            <Button x:Name="buttonProximo" Text="Próximo" Clicked="buttonProximo_Clicked" HorizontalOptions="CenterAndExpand" VerticalOptions="End"></Button>
-        </StackLayout>
-    </ContentPage.Content>
+    <Button x:Name="buttonProximo" Text="Próximo" Clicked="buttonProximo_Clicked" VerticalOptions="End"></Button>
 </ContentPage>
