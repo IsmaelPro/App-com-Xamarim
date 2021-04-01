@@ -3,5 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="{Binding Veiculo.Nome}"
              x:Class="App3.Views.DetalheView">
-    <Button x:Name="buttonProximo" Text="Próximo" Clicked="buttonProximo_Clicked" VerticalOptions="End"></Button>
+    <StackLayout Padding="25">
+        <TableView Intent="Settings">
+            <TableRoot>
+                <TableSection Title="Acessórios">
+                    <SwitchCell Text="{Binding TextoFreioABS,Mode=TwoWay}" On="{Binding TemFreioABS, Mode=TwoWay}"></SwitchCell>
+                    <SwitchCell Text="{Binding ArCondicionado,Mode=TwoWay}" On="{Binding TemArCondicionado,Mode=TwoWay}"></SwitchCell>
+                    <SwitchCell Text="{Binding MP3Player, Mode=TwoWay}" On="{Binding TemMP3Player,Mode=TwoWay}"></SwitchCell>
+                    <TextCell Text="{Binding ValorTotal,Mode=TwoWay}"></TextCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <Button x:Name="buttonProximo" Text="Próximo" Clicked="buttonProximo_Clicked" VerticalOptions="End"></Button>
+    </StackLayout>
 </ContentPage>
