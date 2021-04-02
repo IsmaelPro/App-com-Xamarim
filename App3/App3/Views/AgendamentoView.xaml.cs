@@ -1,4 +1,6 @@
-﻿using System;
+﻿using App3.Models;
+using App3.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,43 +14,31 @@ namespace App3.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AgendamentoView : ContentPage
     {
-        public Veiculo Veiculo { get; set; }
-        public string Nome { get; set; }
-        public string Fone { get; set; }
-        public string Email { get; set; }
-        DateTime dataAgendamento = DateTime.Today;
-        public DateTime DataAgendamento
-        {
-            get
-            {
-                return dataAgendamento;
-            }
-            set
-            {
-                dataAgendamento = value;
-                OnPropertyChanged();
-
-            }
-        }
-        public TimeSpan HoraAgendamento { get; set; }
+        public AgendamentoViewModel ViewModel { get; set; }
 
         public AgendamentoView(Veiculo veiculo)
         {
             InitializeComponent();
-            this.Veiculo = veiculo;
-            this.BindingContext = this;
-
+            this.ViewModel = new AgendamentoViewModel(veiculo);
+            this.BindingContext = this.ViewModel;
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("Agendamento", 
-                "Nome: " + Nome + "\n" + 
-                "Fone: " + Fone + "\n"+ 
-                "Email" + Email + "\n" + 
-                "Data Agendamento: " + DataAgendamento + "\n"+ 
-                "Hora Agendamento: " + HoraAgendamento + "\n", 
-                "Confirmar", "Cancelar");
+            DisplayAlert("Agendamento",
+           string.Format(
+           @"Veiculo: {0}
+            Nome: {1}
+            Fone: {2}
+            E-mail: {3}
+            Data Agendamento: {4}
+            Hora Agendamento: {5}",
+           ViewModel.Agendamento.Veiculo.Nome,
+           ViewModel.Agendamento.Nome,
+           ViewModel.Agendamento.Fone,
+           ViewModel.Agendamento.Email,
+           ViewModel.Agendamento.DataAgendamento.ToString("dd/MM/yyyy"),
+           ViewModel.Agendamento.HoraAgendamento), "OK");
         }
     }
 }

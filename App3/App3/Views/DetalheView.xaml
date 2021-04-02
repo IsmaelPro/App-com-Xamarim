@@ -8,8 +8,8 @@
             <TableRoot>
                 <TableSection Title="Acessórios">
                     <SwitchCell Text="{Binding TextoFreioABS,Mode=TwoWay}" On="{Binding TemFreioABS, Mode=TwoWay}"></SwitchCell>
-                    <SwitchCell Text="{Binding ArCondicionado,Mode=TwoWay}" On="{Binding TemArCondicionado,Mode=TwoWay}"></SwitchCell>
-                    <SwitchCell Text="{Binding MP3Player, Mode=TwoWay}" On="{Binding TemMP3Player,Mode=TwoWay}"></SwitchCell>
+                    <SwitchCell Text="{Binding TextoArCondicionado,Mode=TwoWay}" On="{Binding TemArCondicionado,Mode=TwoWay}"></SwitchCell>
+                    <SwitchCell Text="{Binding TextoMP3Player, Mode=TwoWay}" On="{Binding TemMP3Player,Mode=TwoWay}"></SwitchCell>
                     <TextCell Text="{Binding ValorTotal,Mode=TwoWay}"></TextCell>
                 </TableSection>
             </TableRoot>
