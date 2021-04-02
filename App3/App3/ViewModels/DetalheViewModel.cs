@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace App3.ViewModels
 {
-    public class DetalheViewModel : INotifyPropertyChanged
+    public class DetalheViewModel : BaseViewModel
     {
         public Veiculo Veiculo { get; set; }
 
@@ -94,13 +94,6 @@ namespace App3.ViewModels
             {
                 MessagingCenter.Send(veiculo, "Proximo");
             });
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         public ICommand ProximoCommand { get; set; }
