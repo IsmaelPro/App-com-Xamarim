@@ -8,6 +8,8 @@ namespace App3.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string name = "")
