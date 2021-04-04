@@ -1,4 +1,5 @@
 ﻿using App3.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -34,7 +35,9 @@ namespace App3
                 }
                 if (resultado.IsSuccessStatusCode)
                 {
-                    MessagingCenter.Send<Usuario>(new Usuario(), "SucessoLogin");
+                    var conteudoResultado = await resultado.Content.ReadAsStringAsync();
+                    var resultadoLogin = JsonConvert.DeserializeObject<ResultadoLogin>(conteudoResultado);
+                    MessagingCenter.Send<Usuario>(resultadoLogin.usuario, "SucessoLogin");
                 }
                 else
                 {

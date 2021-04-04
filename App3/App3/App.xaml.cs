@@ -21,7 +21,7 @@ namespace App3
                 (msg) =>
                 {
                     //MainPage = new NavigationPage(new ListagemView());
-                    MainPage = new MasterDetailView();
+                    MainPage = new MasterDetailView(msg);
                 });
         }
 
