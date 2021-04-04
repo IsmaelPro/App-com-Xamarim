@@ -1,10 +1,5 @@
 ﻿using App3.Models;
 using App3.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,22 +12,40 @@ namespace App3.Views
         public MasterView(Usuario usuario)
         {
             InitializeComponent();
-            this.BindingContext = new MasterViewModel(usuario);
+            BindingContext = new MasterViewModel(usuario);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MessagingCenter.Subscribe<Usuario>(this, "EditarPerfil",
-                (msg) =>
-                {
-                    this.CurrentPage = this.Children[1];
-                });
+            AssinarMEnsagens();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+            CancelarMensagens();
+        }
+
+        private void AssinarMEnsagens()
+        {
+            MessagingCenter.Subscribe<Usuario>(this, "EditarPerfil",
+                (msg) =>
+                {
+                    CurrentPage = Children[1];
+                });
+
+            MessagingCenter.Subscribe<Usuario>(this, "SucessoSalvarUsuario",
+                async (msg) =>
+                {
+                    CurrentPage = Children[0];
+                    await DisplayAlert("Usuario", "Usuario Cadastrado Com Sucesso", "OK");
+                });
+        }
+
+        private void CancelarMensagens()
+        {
+            MessagingCenter.Unsubscribe<Usuario>(this, "SucessoSalvarUsuario");
             MessagingCenter.Unsubscribe<Usuario>(this, "EditarPerfil");
         }
     }

@@ -1,8 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:converters="clr-namespace:App3.converters"
              x:Class="App3.Views.MasterView"
              Title="Perfil">
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <converters:NegativoConverter x:Key="negativo"></converters:NegativoConverter>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
 
     <TabbedPage.Children>
         <ContentPage Title="Usuario">
@@ -17,7 +23,23 @@
             </Frame>
         </ContentPage>
         <ContentPage Title="Editar">
-            
+            <Frame BorderColor="Silver" Margin="15" VerticalOptions="CenterAndExpand">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <TableView>
+                        <TableRoot>
+                            <TableSection Title="Dados Pessoais">
+                                <EntryCell Placeholder="Nome" Text="{Binding Nome}" IsEnabled="{Binding Editando}"></EntryCell>
+                                <EntryCell Placeholder="Data de Nascimento" Text="{Binding DataNascimento}" IsEnabled="{Binding Editando}"></EntryCell>
+                                <EntryCell Placeholder="Telefone" Text="{Binding Telefone}" IsEnabled="{Binding Editando}"></EntryCell>
+                                <EntryCell Placeholder="Email" Text="{Binding Email}" IsEnabled="{Binding Editando}"></EntryCell>
+
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+                    <Button Text="Salvar" Command="{Binding SalvarCommand}" IsVisible="{Binding Editando}"></Button>
+                    <Button Text="Editar" Command="{Binding EditarCommand}" IsVisible="{Binding Editando, Converter={StaticResource Key=negativo}}"></Button>
+                </StackLayout>
+            </Frame>
         </ContentPage>
     </TabbedPage.Children>
     

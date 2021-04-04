@@ -1,13 +1,10 @@
 ﻿using App3.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace App3.ViewModels
 {
-    public class MasterViewModel
+    public class MasterViewModel : BaseViewModel
     {
         public string Nome
         {
@@ -21,17 +18,61 @@ namespace App3.ViewModels
             set { this.usuario.email = value; }
         }
 
+        public string DataNascimento
+        {
+            get { return this.usuario.dataNascimento; }
+            set { this.usuario.dataNascimento = value; }
+        }
+
+        public string Telefone
+        {
+            get { return this.usuario.telefone; ; }
+            set { this.usuario.telefone = value; }
+        }
+
+        public ICommand SalvarCommand { get; private set; }
+        public ICommand EditarCommand { get; private set; }
         public ICommand EditarPerfilCommand { get; private set; }
+
         private readonly Usuario usuario;
+
+        private bool editando = false;
+
+        public bool Editando
+        {
+            get { return editando; }
+            private set
+            {
+                editando = value;
+                OnPropertyChanged(nameof(Editando));
+            }
+        }
 
         public MasterViewModel(Usuario usuario)
         {
             this.usuario = usuario;
-            EditarPerfilCommand = new Command(() =>
-            {
-                MessagingCenter.Send<Usuario>(new Usuario(), "EditarPerfil");
-            });
+            DefinirComandos();
         }
 
+        private void DefinirComandos()
+        {
+            EditarPerfilCommand = new Command(() =>
+            {
+                this.Editando = false;
+                MessagingCenter.Send<Usuario>(new Usuario(), "EditarPerfil");
+            });
+
+            SalvarCommand = new Command(() =>
+            {
+                this.Editando = false;
+                MessagingCenter.Send<Usuario>(new Usuario(), "SucessoSalvarUsuario");
+            });
+
+            EditarCommand = new Command(() =>
+            {
+                this.Editando = true;
+            });
+
+        }
     }
 }
