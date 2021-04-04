@@ -12,33 +12,34 @@ namespace App3
     {
         public async Task FazerLogin(Login login)
         {
-            try
+            using (var cliente = new HttpClient())
             {
-                using (var cliente = new HttpClient())
+                var camposFormulario = new FormUrlEncodedContent(new[]
                 {
-                    var camposFormulario = new FormUrlEncodedContent(new[]
-                    {
                     new KeyValuePair<string, string>("email", login.email),
                     new KeyValuePair<string, string>("senha", login.senha)
                 });
-                    cliente.BaseAddress = new Uri("https://aluracar.herokuapp.com");
-                    var resultado = await cliente.PostAsync("/login", camposFormulario);
+                cliente.BaseAddress = new Uri("https://aluracar.herokuapp.com");
+                HttpResponseMessage resultado = null;
+                try
+                {
+                    resultado = await cliente.PostAsync("/login", camposFormulario);
 
-                    if (resultado.IsSuccessStatusCode)
-                    {
-                        MessagingCenter.Send<Usuario>(new Usuario(), "SucessoLogin");
-                    }
-                    else
-                    {
-                        MessagingCenter.Send<LoginException>(new LoginException("Usuario ou senha incorretos!"), "FalhaLogin");
-                    }
                 }
-            }
-            catch 
-            {
+                catch
+                {
 
-                MessagingCenter.Send<LoginException>(new LoginException(@"Ocorreu um erro de comunicação com o servidor.
+                    MessagingCenter.Send<LoginException>(new LoginException(@"Ocorreu um erro de comunicação com o servidor.
                 Verifique sua senha e tente novamente mais tarde"), "FalhaLogin");
+                }
+                if (resultado.IsSuccessStatusCode)
+                {
+                    MessagingCenter.Send<Usuario>(new Usuario(), "SucessoLogin");
+                }
+                else
+                {
+                    MessagingCenter.Send<LoginException>(new LoginException("Usuario ou senha incorretos!"), "FalhaLogin");
+                }
             }
         }
     }

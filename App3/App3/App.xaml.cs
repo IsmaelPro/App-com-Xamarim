@@ -20,7 +20,8 @@ namespace App3
             MessagingCenter.Subscribe<Usuario>(this, "SucessoLogin",
                 (msg) =>
                 {
-                    MainPage = new NavigationPage(new ListagemView());
+                    //MainPage = new NavigationPage(new ListagemView());
+                    MainPage = new MasterDetailView();
                 });
         }
 
