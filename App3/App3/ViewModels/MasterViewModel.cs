@@ -1,4 +1,5 @@
-﻿using App3.Models;
+﻿using App3.Midia;
+using App3.Models;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -33,6 +34,7 @@ namespace App3.ViewModels
         public ICommand SalvarCommand { get; private set; }
         public ICommand EditarCommand { get; private set; }
         public ICommand EditarPerfilCommand { get; private set; }
+        public ICommand TirarFotoCommand { get; private set; }
 
         private readonly Usuario usuario;
 
@@ -47,6 +49,16 @@ namespace App3.ViewModels
                 OnPropertyChanged(nameof(Editando));
             }
         }
+
+        private ImageSource fotoPerfil = "perfil.png";
+
+        public ImageSource FotoPerfil
+        {
+            get { return fotoPerfil; }
+            private set { fotoPerfil = value; }
+        }
+
+
 
         public MasterViewModel(Usuario usuario)
         {
@@ -71,6 +83,11 @@ namespace App3.ViewModels
             EditarCommand = new Command(() =>
             {
                 this.Editando = true;
+            });
+
+            TirarFotoCommand = new Command(() =>
+            {
+                DependencyService.Get<ICamera>().TirarFoto();
             });
 
         }
